@@ -1,5 +1,6 @@
-import { useReducer } from 'react';
+import { useState, useCallback } from 'react';
 import { createContainer } from 'react-tracked';
+import produce from 'immer';
 
 
 const initialState = {
@@ -11,42 +12,20 @@ const initialState = {
     query: '',
   };
 
-let nextId = 4;
+const useValue = () => useState(initialState);
 
-const reducer  = (state, action) => {
-    switch (action.type) {
-      case 'ADD_TODO':
-        return {
-          ...state,
-          todos: [...state.todos, { id: nextId++, title: action.title }],
-        }
-      case 'DELETE_TODO':
-        return {
-          ...state,
-          todos: state.todos.filter(todo => todo.id !==  action.id)
-        }
-      case 'TOGGLE_TODO':
-        return {
-          ...state,
-          todos: state.todos.map(todo =>
-            todo.id === action.id ? { ...todo, completed: !todo.completed }
-            : todo
-          )
-        };
-      case 'SET_QUERY':
-        return {
-          ...state,
-          query: action.query,
-        };
-      default:
-        return state
-    }
-  };
+const {Provider, useTrackedState, useUpdate: useSetState } = createContainer(
+  useValue,
+);
 
-const useValue = () => useReducer(reducer, initialState);
+const useSetDraft = () => {
+  const setState = useSetState();
+  return useCallback(
+    draftUpdater => {
+      setState(produce(draftUpdater));
+    },
+    [setState],
+  );
+};
 
-export const {
-    Provider,
-    useTrackedState,
-    useUpdate: useDispatch,
-} = createContainer(useValue);
+export { Provider, useTrackedState, useSetDraft };
