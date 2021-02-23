@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useDispatch, useTrackedState } from '../store';
-import { useFlasher } from '../utils';
+import { useDispatch, useTrackedState } from '../../store';
+import { useFlasher } from '../../utils';
 
 const renderHighlight = (title, query) => {
   if (!query) return title;

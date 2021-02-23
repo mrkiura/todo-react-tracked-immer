@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useTrackedState} from '../store';
+import { useDispatch, useTrackedState} from '../../store';
 
 import TodoItem from './TodoItem';
 import NewTodo from './NewTodo';

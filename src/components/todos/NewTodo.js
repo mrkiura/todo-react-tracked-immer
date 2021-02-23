@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { useDispatch } from '../store';
-import { useFlasher } from '../utils';
+import { useDispatch } from '../../store';
+import { useFlasher } from '../../utils';
 
 
 const NewTodo = () => {
