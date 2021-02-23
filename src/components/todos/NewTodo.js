@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-import { useDispatch } from '../../store';
-import { useFlasher } from '../../utils';
+import { useAddTodo } from '../hooks/useAddTodo';
+import { useFlasher } from '../utils';
 
 
 const NewTodo = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAddTodo();
     const [text, setText] = useState('');
     const addTodo = () => {
         dispatch({ type: 'ADD_TODO', title: text});
@@ -18,7 +18,13 @@ const NewTodo = () => {
                 placeholder="Enter title..."
                 onChange={ e => setText(e.target.value)}
             />
-            <button onClick={addTodo}>Add</button>
+            <button
+                onClick={() => {
+                    addTodo(text);
+                    setText('')
+                }}
+            >
+                Add</button>
         </li>
     );
 };
