@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 
-import { useAddTodo } from '../hooks/useAddTodo';
-import { useFlasher } from '../utils';
+import { useAddTodo } from '../../hooks/useAddTodo';
+import { useFlasher } from '../../utils';
 
 
 const NewTodo = () => {
-    const dispatch = useAddTodo();
+    const addTodo = useAddTodo();
     const [text, setText] = useState('');
-    const addTodo = () => {
-        dispatch({ type: 'ADD_TODO', title: text});
-        setText('');
-    }
+
     return (
         <li ref={useFlasher()}>
             <input

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider} from './store';
-import TodoList from './todos/TodoList';
+import TodoList from './components/todos/TodoList';
 require('./style.css');
 
 
