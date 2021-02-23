@@ -15,4 +15,4 @@ export const useQuery = () => {
         [setDraft],
     );
     return { getQuery, setQuery };
-}
+};
